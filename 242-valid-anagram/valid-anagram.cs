@@ -21,7 +21,7 @@ public class Solution {
      }
      return true;
 
-    // this solution with out using sort
+    // this solution with  using sort
     //  var sorce = s.ToCharArray();
         // var target = t.ToCharArray();
     //    Array.Sort(sorce);
