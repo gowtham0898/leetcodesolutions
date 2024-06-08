@@ -28,6 +28,7 @@ public class Solution {
                 }
             }
         }
+      
         // 1st column
             if (matrix[0][0] == 0)
             {
@@ -35,9 +36,8 @@ public class Solution {
                 {
                     matrix[r][0] = 0;
                 }
-
-                
             }
+
             // 1st row
             if (first_row_dirty == true)
             {
@@ -46,5 +46,9 @@ public class Solution {
                     matrix[0][c] = 0;
                 }
             }
+            
     }
 } 
+
+// note: to get 1st row itrate through 1st column 
+//n[0][c] // gives 1st row values 
