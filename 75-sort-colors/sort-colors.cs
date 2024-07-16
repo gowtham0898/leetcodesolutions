@@ -1,0 +1,27 @@
+public class Solution {
+    public void SortColors(int[] nums) {
+        int l = 0;
+        int m = 0;
+        int h = nums.Length - 1;
+        
+        while(m <= h){
+            if(nums[m]==0){
+                int temp = nums[m];
+                nums[m] = nums[l];
+                nums[l] = temp;
+                l++;
+                m++;
+            }
+            else if(nums[m] == 1){
+                m++;
+            }
+            else//(nums[m]==2)
+            {
+                int temp = nums[m];
+                nums[m] = nums[h];
+                nums[h] = temp;
+                h--;
+            }
+        }
+    }
+}
