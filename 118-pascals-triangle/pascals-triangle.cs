@@ -6,7 +6,8 @@ public class Solution {
             IList<int> row = new List<int>(new int[c+1]);
             row[0] = 1; // 1st index
             row[row.Count - 1] = 1; // last index
-            for( int r = 1; r < c; r++){ // exclude 1st and last column
+            for( int r = 1; r < c; r++)// exclude 1st and last column
+            { 
             row[r] = result[c-1][r-1] + result[c-1][r];
             }
             result.Add(row);
