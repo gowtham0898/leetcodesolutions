@@ -11,9 +11,9 @@ public class Solution {
             //     l++;
             // }
             if(nums[i]> nums[l-1]){
-                var temp = nums[i];
-                nums[i] = nums[l];
-                nums[l] = temp;
+                //var temp = nums[i];
+                nums[l] = nums[i];
+                //nums[l] = temp;
                 l++;
             }
             
