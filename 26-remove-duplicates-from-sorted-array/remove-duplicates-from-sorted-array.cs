@@ -5,9 +5,15 @@ public class Solution {
         for(int i = 1; i < nums.Length;i++){ // i is our right pointer
               // if you find any unique number then assign that to left pointer index and 
               // increment the left point
-            if(nums[i] != nums[i-1])
-            {
-                nums[l] = nums[i];
+            // if(nums[i] != nums[i-1])
+            // {
+            //     nums[l] = nums[i];
+            //     l++;
+            // }
+            if(nums[i]> nums[l-1]){
+                var temp = nums[i];
+                nums[i] = nums[l];
+                nums[l] = temp;
                 l++;
             }
             
