@@ -3,6 +3,7 @@ public class Solution {
         IList<IList<int>> result = new List<IList<int>> ();
 
         for(int c = 0; c < numRows; c++){
+            // initialize length of the row 
             IList<int> row = new List<int>(new int[c+1]);
             row[0] = 1; // 1st index
             row[row.Count - 1] = 1; // last index
