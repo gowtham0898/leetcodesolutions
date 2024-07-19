@@ -4,6 +4,8 @@ public class Solution {
        int l = 0;
        int profit = 0;
        for(int r = 1; r < prices.Length; r++){
+        // my purchare should be lower
+        // else shift the left pointer to right(which is lowest then before)
          if(prices[l] < prices[r]){
             profit = prices[r] - prices[l];
          }
@@ -16,4 +18,6 @@ public class Solution {
        }
        return max_profit;
     }
+
+    
 }
