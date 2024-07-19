@@ -21,6 +21,7 @@ public class Solution {
                 
             }
         }
+        // make correspnding row and column as zero
         for(int r = 1; r < matrix.Length; r++){
             for(int c = 1 ; c < matrix[0].Length ; c++){
                 if(matrix[0][c]== 0 || matrix[r][0] == 0){
