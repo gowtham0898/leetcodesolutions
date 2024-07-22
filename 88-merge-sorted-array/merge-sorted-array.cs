@@ -4,7 +4,7 @@ public class Solution {
     for(int i = 0; i < nums1.Length; i++){
         if(nums1[i]==0)
         {
-            if(n > j){
+            if(j < n){
             nums1[i] = nums2[j];
             
                 j++;
