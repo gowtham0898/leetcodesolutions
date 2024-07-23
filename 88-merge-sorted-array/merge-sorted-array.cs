@@ -1,33 +1,31 @@
 public class Solution {
     public void Merge(int[] nums1, int m, int[] nums2, int n) {
+    int l = 0,r = 0,i =0;
+    int[] result = new int[m + n];
 
-     int[] result = new int[m + n];
-    int l = 0, r = 0, i = 0;
-    
-    // Merge both arrays
-    while (l < m && r < n) {
-        if (nums1[l] <= nums2[r]) {
-            result[i++] = nums1[l++];
-        } else {
-            result[i++] = nums2[r++];
+    while(l < m && r < n){
+        if(nums1[l] <= nums2[r]){
+            result[i] = nums1[l];
+            i++;l++;
+        }
+        else{
+            result[i] = nums2[r];
+            i++;r++;
         }
     }
-    
-    // Copy any remaining elements from nums1
-    while (l < m) {
-        result[i++] = nums1[l++];
-    }
-    
-    // Copy any remaining elements from nums2
-    while (r < n) {
-        result[i++] = nums2[r++];
-    }
-    
-    // Copy the result back to nums1
-    for (i = 0; i < m + n; i++) {
-        nums1[i] = result[i];
-    }
 
+    while(r < n){
+            result[i] = nums2[r];
+            i++;r++;
+    }
+    
+    while(l<m){
+        result[i] = nums1[l];
+        i++;l++;
+    }
+    for(int j = 0;j < m+n; j++){
+        nums1[j] = result[j];
+    }
     // int j = 0;
     // for(int i = 0; i < nums1.Length; i++){
     //     if(nums1[i]==0)
