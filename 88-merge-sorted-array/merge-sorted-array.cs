@@ -26,6 +26,8 @@ public class Solution {
     for(int j = 0;j < m+n; j++){
         nums1[j] = result[j];
     }
+
+    // timecomplexicity O(m+n) and spaceComplexicity O(M+N)
     // int j = 0;
     // for(int i = 0; i < nums1.Length; i++){
     //     if(nums1[i]==0)
