@@ -13,12 +13,17 @@ public class Solution {
                 b1++;
             }
         }
+
         for(int j = 0; j< (nums.Length / 2); j++){
-         int z = j +j;
+            // this will if length is 6 but you want to 
+            //itrate half times to fill all the 6 elements
+         
             nums[j+j] = a[j];
             nums[j+j+1] = b[j];
         }
 
         return nums;
     }
+
+    // time and space complacity = O(N)
 }
