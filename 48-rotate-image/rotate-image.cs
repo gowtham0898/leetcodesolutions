@@ -2,8 +2,10 @@ public class Solution {
     public void Rotate(int[][] matrix) {
 
          int n = matrix.Length;
+         //change row to column here 
             for (int i = 0; i < n; i++)
             {
+                //trick here y j < i
                 for (int j = i; j < n; j++)
                 {
                     var temp = matrix[i][j];                
@@ -11,13 +13,18 @@ public class Solution {
                     matrix[j][i] = temp;
                 }
             }
-
+            // here inter change the column
+        //eg: (0,0) ==> (0,2)
+            //(1,0) ==> (1,2)
+            //(2,0) ==> (2,2)
+            // so i will be same only j we need to last always
             for (int i = 0;i < n; i++)
             {
                 for(int j = 0; j < n/2;j++)
                 {
                     var temp = matrix[i][j];
                     matrix[i][j] = matrix[i][n - 1 - j];
+
                     matrix[i][n - 1 - j] = temp;
 
                 }
