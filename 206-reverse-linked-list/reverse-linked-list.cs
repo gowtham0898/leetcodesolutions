@@ -15,12 +15,14 @@ public class Solution {
         if(head == null || head.next == null){
             return head;
         }
-
-        ListNode newHead = ReverseList(head.next);
-
-        ListNode front = head.next;
-        front.next = head;
-        head.next = null;
-        return newHead;
+        ListNode current = head;
+        ListNode past = null;
+        while(current != null){
+            ListNode front = current.next;
+            current.next = past;
+            past = current;
+            current = front;
+        }
+        return past;
     }
 }
