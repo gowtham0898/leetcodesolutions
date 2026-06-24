@@ -1,31 +1,23 @@
 public class Solution {
-    public bool IsAnagram(string s, string t)
-    {
-     
-     if (s.Length != t.Length)
-     {
-         return false;
-     }
-     List<char> source = new List<char>(s);
-     List<char> target = new List<char>(t);
-     for ( int i = 0; i < source.Count(); i++)
-     {
-         if (target.Contains(source[i]))
-         {
-             target.Remove(source[i]);
-         }
-     }
-     if(target.Count != 0) 
-     {
-         return false;
-     }
-     return true;
+    public bool IsAnagram(string s, string t) {
+        if(s.Length != t.Length){
+            return false;
+        }
 
-    // this solution with  using sort
-    //  var sorce = s.ToCharArray();
-        // var target = t.ToCharArray();
-    //    Array.Sort(sorce);
-    //    Array.Sort(target);
-    //    return sorce.SequenceEqual(target);
- }
+        int[] s1 = new int[26];
+        for(int i = 0; i< s.Length ; i++){
+            s1[s[i] - 'a']++;
+        }
+          for(int i = 0; i< t.Length ; i++){
+            s1[t[i] - 'a']--;
+        }
+
+        foreach(var asci in s1){
+            if(asci > 0){
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
