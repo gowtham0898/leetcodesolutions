@@ -1,30 +1,21 @@
 public class Solution {
     public IList<IList<string>> GroupAnagrams(string[] strs) {
-        IList<IList<string>> result = new List<IList<string>>();
-        IDictionary<string, IList<string>> keyValuePairs = new Dictionary<string, IList<string>>();
-
-        for (int i = 0; i < strs.Length; i++)
-        {
-            IList<string> subString = new List<string>();
-            var value = strs[i].ToCharArray();
-            Array.Sort(value);
-
-            subString.Add(strs[i]);
-
-            if(keyValuePairs.ContainsKey(new string(value)))
-            {
-                keyValuePairs[new string(value)].Add(strs[i]);
+        
+        Dictionary<string,List<string>> map = new();
+        for(int i = 0; i< strs.Length; i++){
+            int[] asci = new int[26];
+            foreach(var ch in strs[i]){
+                asci[ch - 'a']++;
             }
-            else
-            {
-                keyValuePairs.Add(new string(value), subString);
+            var s_key = string.Join(',',asci);
 
+            if(map.ContainsKey(s_key)){
+                map[s_key].Add(strs[i]);
+            } 
+            else{
+                map[s_key] = new List<string>{strs[i]};
             }
         }
-        foreach(var res in keyValuePairs)
-        {
-            result.Add(res.Value);
-        }
-        return result;
+        return map.Values.ToList<IList<string>>();
     }
 }
