@@ -2,16 +2,19 @@ public class NumArray {
     private readonly int[] input_array;
 
     public NumArray(int[] nums) {
-       input_array =  nums;
+       input_array = new int[nums.Length]; 
+       int cr_sum = 0;
+       for(int i = 0; i< nums.Length; i++){
+            cr_sum += nums[i];
+            input_array[i] = cr_sum;
+       }
     }
     
     public int SumRange(int left, int right) {
-        int cur_sum = 0;
-        while(left <= right){
-            cur_sum += input_array[left];
-            left++;
+        if(left == 0){
+            return input_array[right];
         }
-        return cur_sum;
+        return input_array[right] - input_array[left -1];
     }
 }
 
