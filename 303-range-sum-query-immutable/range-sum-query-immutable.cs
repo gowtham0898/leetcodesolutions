@@ -1,20 +1,22 @@
 public class NumArray {
-    private readonly int[] input_array;
-
-    public NumArray(int[] nums) {
-       input_array = new int[nums.Length]; 
-       int cr_sum = 0;
-       for(int i = 0; i< nums.Length; i++){
-            cr_sum += nums[i];
-            input_array[i] = cr_sum;
-       }
+    private readonly int[] res_nums;
+    public NumArray(int[] nums) {   
+        res_nums = new int[nums.Length];     
+        for(int i = 0; i < nums.Length; i++){
+            if(i == 0){
+                res_nums[0] = nums[0];
+                continue;
+            }
+            res_nums[i] = res_nums[i-1] + nums[i];
+        }
     }
     
     public int SumRange(int left, int right) {
         if(left == 0){
-            return input_array[right];
+            return res_nums[right];
         }
-        return input_array[right] - input_array[left -1];
+
+        return res_nums[right]  - res_nums[left - 1] ;
     }
 }
 
