@@ -6,16 +6,18 @@ public class Solution {
                 int x = point[0];
                 int y = point[1];
             int sum = x*x + y*y;
-             min_heap.Enqueue(point,sum);   
+             min_heap.Enqueue(point,-sum);  
+             if(min_heap.Count > k){
+                min_heap.Dequeue();
+             } 
         }
         int[][] res = new int[k][];
        int i = 0;
 
-        while(k > 0)
+        while(min_heap.Count >  0)
         {
             res[i] = min_heap.Dequeue();
             i++;
-            k--;
         }
         return res;
      }
