@@ -14,11 +14,13 @@ public class Solution {
             result.Add(new List<int>(sub_set));
             return;
         }
-        // take
+        //include
         sub_set.Add(nums[index]);
-        BackTracking(index + 1, nums, result, sub_set);
 
+        BackTracking(index + 1, nums, result, sub_set);
+        //exclude
         sub_set.RemoveAt(sub_set.Count -1);
+        
         BackTracking(index + 1, nums, result, sub_set);
     }
 }
