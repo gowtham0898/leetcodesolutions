@@ -1,20 +1,20 @@
 public class NumArray {
-    private readonly int[] pre_nums;
+    private readonly int[] prefix_sum;
     public NumArray(int[] nums) {
-        pre_nums = new int[nums.Length];
-        int pre_sum = 0;
-        for(int i = 0 ; i < nums.Length ; i++){
-            pre_sum  += nums[i];
-            pre_nums[i] = pre_sum;
-        }
-        
+        prefix_sum = new int[nums.Length];
+        int cur_sum = 0;
+        for(int i = 0; i < nums.Length; i++){
+            cur_sum += nums[i];
+            prefix_sum[i] = cur_sum;
+        } 
     }
     
     public int SumRange(int left, int right) {
-        if(left == 0){
-            return pre_nums[right];
-        }
-        return pre_nums[right] - pre_nums[left - 1];
+          if(left ==0){
+            return prefix_sum[right];
+          }  
+
+          return prefix_sum[right] - prefix_sum[left-1];
     }
 }
 
