@@ -1,57 +1,35 @@
-public class MedianFinder
-{
-    private readonly PriorityQueue<int, int> min_heap;
-    private readonly PriorityQueue<int, int> max_heap;
-
-    public MedianFinder()
-    {
-        min_heap = new();
-        max_heap = new();
+public class MedianFinder {
+    private readonly PriorityQueue<int,int> max_que;
+    private readonly PriorityQueue<int,int> min_que;
+    public MedianFinder() {
+        max_que = new();
+        min_que = new();
     }
-
-    public void AddNum(int num)
-    {
-        max_heap.Enqueue(num, -num);
-
-        int value = max_heap.Dequeue();
-        min_heap.Enqueue(value, value);
-        if(min_heap.Count > max_heap.Count){
-            int val = min_heap.Dequeue();
-            max_heap.Enqueue(val,-val);    
+    
+    public void AddNum(int num) {
+        max_que.Enqueue(num,-num);
+        if(max_que.Count > min_que.Count){
+            var  min = max_que.Dequeue();
+            min_que.Enqueue(min, min);
         }
-        // alternative way 
-        // if (min_heap.Count > 0 && max_heap.Peek() > min_heap.Peek())
-        // {
-        //     int value = max_heap.Dequeue();
-        //     min_heap.Enqueue(value, value);
-        // }
 
-        // if (max_heap.Count > min_heap.Count + 1)
-        // {
-        //     int value = max_heap.Dequeue();
-        //     min_heap.Enqueue(value, value);
-        // }
-        // else if (min_heap.Count > max_heap.Count + 1)
-        // {
-        //     int value = min_heap.Dequeue();
-        //     max_heap.Enqueue(value, -value);
-        // }
+        if(min_que.Count >= max_que.Count +1){
+            var max = min_que.Dequeue();
+            max_que.Enqueue(max, -max);
+        }
     }
-
-    public double FindMedian()
-    {
-        if(max_heap.Count == min_heap.Count){
-            return (max_heap.Peek() + min_heap.Peek())/2.0;
-        }
-        return max_heap.Peek();
-        // alternative
-        // if (max_heap.Count == min_heap.Count)
-        // {
-        //     return (max_heap.Peek() + min_heap.Peek()) / 2.0;
-        // }
-
-        // return max_heap.Count > min_heap.Count
-        //     ? max_heap.Peek()
-        //     : min_heap.Peek();
+    
+    public double FindMedian() {
+          if(max_que.Count == min_que.Count){
+            return (max_que.Peek() + min_que.Peek()) /2.0;
+          }  
+          return max_que.Peek();
     }
 }
+
+/**
+ * Your MedianFinder object will be instantiated and called as such:
+ * MedianFinder obj = new MedianFinder();
+ * obj.AddNum(num);
+ * double param_2 = obj.FindMedian();
+ */
