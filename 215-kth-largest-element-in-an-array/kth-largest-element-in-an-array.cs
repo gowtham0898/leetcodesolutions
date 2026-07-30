@@ -4,11 +4,11 @@ public class Solution {
 
        for(int i = 0; i < nums.Length; i++){
         min_heap.Enqueue(nums[i],nums[i]);
-        while(min_heap.Count > k){
+        if(min_heap.Count > k){
             min_heap.Dequeue();
         }
        } 
 
-       return min_heap.Dequeue();
+       return min_heap.Peek();
     }
 }
