@@ -1,27 +1,19 @@
 public class Solution {
     public IList<IList<int>> Subsets(int[] nums) {
         IList<IList<int>> result = new List<IList<int>>();
-        List<int>sub_set = new();
-        BackTracking(0, nums,result,sub_set);
-
-        return result;
+        List<int> cur = new();
+       solve(nums, 0,result, cur);
+       return result; 
     }
 
-    private void BackTracking (int index, int[] nums,
-    IList<IList<int>> result,  List<int>sub_set){
-        // condetion
+    private void solve(int[] nums, int index , IList<IList<int>> result, List<int> cur){
         if(index == nums.Length){
-            result.Add(new List<int>(sub_set));
+            result.Add(new List<int>(cur));
             return;
         }
-        //include
-        sub_set.Add(nums[index]);
-
-        BackTracking(index + 1, nums, result, sub_set);
-        //exclude
-        sub_set.RemoveAt(sub_set.Count -1);
-        
-        BackTracking(index + 1, nums, result, sub_set);
+        cur.Add(nums[index]);
+        solve(nums, index+1,result, cur);
+        cur.RemoveAt(cur.Count -1);
+          solve(nums, index +1,result, cur);
     }
 }
-
