@@ -1,26 +1,24 @@
 public class Solution {
     public IList<IList<int>> Permute(int[] nums) {
-     IList<IList<int>> result = new List<IList<int>>();
-     List<int> current = new();
-         Backtrack(result,nums, current); 
-         return result;
-    }
+        IList<IList<int>> result = new List<IList<int>>();
+         List<int> cur = new();
 
-    private void Backtrack( IList<IList<int>> result, int[] nums, List<int> current){
-        
-        if(current.Count == nums.Length){
-            result.Add(new List<int>(current));
+    Solve(nums, result,cur);
+    return result;
+    }
+    private void Solve(int[] nums, IList<IList<int>> result, List<int> cur){
+
+        if(cur.Count == nums.Length){
+            result.Add(new List<int>(cur));
             return;
         }
-
-        foreach(int num in nums){
-
-         if(current.Contains(num)){
-            continue;
-         }  
-         current.Add(num);
-         Backtrack(result,nums, current); 
-          current.RemoveAt(current.Count - 1);
+        foreach(var num in nums){
+            if(cur.Contains(num)){
+                continue;
+            }
+            cur.Add(num);
+            Solve(nums, result,cur);
+            cur.RemoveAt(cur.Count -1);
         }
     }
 }
