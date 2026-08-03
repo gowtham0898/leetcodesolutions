@@ -12,6 +12,9 @@ public class Solution {
         contain.Add((sr,sc));
         queue.Enqueue((sr,sc));    
         int original = image[sr][sc];
+        if(original == color){
+            return image;
+        }
         image[sr][sc] = color;
         int[][] directions = {
             new[] {-1,0},
