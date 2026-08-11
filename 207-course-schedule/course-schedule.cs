@@ -1,34 +1,39 @@
 public class Solution {
     public bool CanFinish(int numCourses, int[][] prerequisites) {
-        Dictionary<int, List<int>> pre_map = new();
-        for(int i = 0; i < numCourses; i ++){
-            pre_map[i] = new List<int>();
+        Dictionary<int,List<int>> pre_req = new();
+
+        for(int c = 0; c < numCourses; c++){
+            pre_req[c] = new List<int>();
         }
-        foreach(var pre in prerequisites){
-            int course = pre[0];
-            int pre_req = pre[1];
-            pre_map[course].Add(pre_req);
+        foreach(var cr in prerequisites){           
+            pre_req[cr[0]].Add(cr[1]);
         }
 
-        HashSet<int> exist = new();
-        for(int course = 0; course < numCourses; course++){
-            if(!DFS(course,pre_map,exist)) return false;
+        HashSet<int> visit = new();
+        for(int cur =0; cur < numCourses; cur++){
+                if(!DFS(cur,pre_req,visit)){
+                    return false;
+                }
         }
         return true;
     }
-    private bool DFS(int course,  Dictionary<int, List<int>> pre_map, HashSet<int> exist){
-        if(exist.Contains(course)){
+
+    private bool DFS(int cur_cr,Dictionary<int,List<int>> pre_req, HashSet<int> visit){
+        if(visit.Contains(cur_cr)){
             return false;
         }
-        if(pre_map[course].Count == 0){
+        if(pre_req[cur_cr].Count == 0){
             return true;
         }
-        exist.Add(course);
-        foreach(var pre in pre_map[course]){
-            if(!DFS(pre,pre_map,exist)) return false;            
+
+        visit.Add(cur_cr);
+        foreach(var cur in pre_req[cur_cr]){
+           if(!DFS(cur,pre_req,visit)){
+            return false;
+           }
         }
-        exist.Remove(course);
-        pre_map[course] = [];
-        return true;
+     visit.Remove(cur_cr);
+    pre_req[cur_cr] = [];
+    return true;
     }
 }
