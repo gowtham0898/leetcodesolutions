@@ -23,20 +23,23 @@ public class Node {
 
 public class Solution {
     public Node CloneGraph(Node node) {
-        if(node == null) return node;
+        if(node == null){
+            return null;
+        }
         Dictionary<Node,Node> old_new = new();
-        return DFS(node, old_new);
+        return  DFS(node,old_new);
     }
-    private Node DFS(Node node, Dictionary<Node,Node> old_new){
+    private Node DFS(Node node,Dictionary<Node,Node> old_new){
         if(old_new.ContainsKey(node)){
             return old_new[node];
         }
-        Node copy = new Node(node.val);
+       Node copy = new Node(node.val);
         old_new[node] = copy;
-        foreach(var nei in node.neighbors){
-            copy.neighbors.Add(DFS(nei, old_new));            
+
+        foreach(var nig in node.neighbors){
+            copy.neighbors.Add(DFS(nig,old_new));            
         }
 
-        return copy;
+       return copy;
     }
 }
