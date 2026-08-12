@@ -1,63 +1,61 @@
-public class TriNode{
-    private readonly Dictionary<char,TriNode> child;
-    private bool flag;
-    public TriNode(){
-        child = new();
-        flag = false;
+public class TrieNode{
+    public readonly Dictionary<char,TrieNode> node;
+    public bool is_word;
+    public TrieNode(){
+        node = new();
+        is_word = false;
     }
-   public bool ContainsKey(char ch){
-         return child.ContainsKey(ch);
+
+    public bool ContainsKey(char ch){
+        if(node.ContainsKey(ch)){
+            return true;
+        }        
+         return false;
     }
-   public void put(char ch, TriNode new_node){
-        child[ch] = new_node;
+    public TrieNode GetNode(char ch){
+        return node[ch];
     }
-  public  TriNode get(char ch){
-        return  child[ch];
-    }
-  public  void setflag(){
-        flag = true;
-    }
- public   bool getflag(){
-        return flag;
-    }
+    public void put(char ch, TrieNode new_node){
+        node[ch] = new_node;
+    }    
 }
 public class Trie {
-    private readonly TriNode root;
+public readonly TrieNode root;
     public Trie() {
-        root = new TriNode();
+        root = new();
     }
     
     public void Insert(string word) {
-        TriNode curr_node = root;
-         for(int i = 0; i< word.Length; i ++){
-            if(!curr_node.ContainsKey(word[i])){
-                curr_node.put(word[i],new TriNode());
-            }
-            curr_node = curr_node.get(word[i]);
-         }
-        curr_node.setflag();
+      TrieNode node = root;
+      for(int i = 0; i < word.Length; i++){
+        if(!node.ContainsKey(word[i])){
+            node.put(word[i],new TrieNode());
+        }
+        node = node.GetNode(word[i]);
+      }  
+      node.is_word = true;
     }
     
     public bool Search(string word) {
-         TriNode curr_node  = root;
-         for(int i = 0; i< word.Length; i ++){
-            if(!curr_node.ContainsKey(word[i])){
-                return false;
-            }
-            curr_node = curr_node.get(word[i]);
-         }
-         return curr_node.getflag();
+         TrieNode node = root;
+          for(int i = 0; i < word.Length; i++){
+        if(!node.ContainsKey(word[i])){
+           return false;
+        }
+        node = node.GetNode(word[i]);
+      }  
+     return  node.is_word;
     }
     
     public bool StartsWith(string prefix) {
-         TriNode curr_node  = root;
-         for(int i = 0; i< prefix.Length; i ++){
-            if(!curr_node.ContainsKey(prefix[i])){
-                return false;
-            }
-            curr_node = curr_node.get(prefix[i]);
-         }
-         return true;
+         TrieNode node = root;
+          for(int i = 0; i < prefix.Length; i++){
+        if(!node.ContainsKey(prefix[i])){
+           return false;
+        }
+        node = node.GetNode(prefix[i]);
+      }  
+     return  true;
     }
 }
 
