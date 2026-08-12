@@ -1,57 +1,56 @@
 public class TrieNode{
-    public readonly Dictionary<char,TrieNode> childern;
+    public readonly Dictionary<char,TrieNode> child;
     public bool is_word;
     public TrieNode(){
-        childern = new();
+        child = new ();
         is_word = false;
     }
-
     public void AddWord(string word, TrieNode node){
-        foreach(var ch in word){
-            if(!node.childern.ContainsKey(ch)){
-                node.childern[ch] = new TrieNode();    
-            }   
-            node = node.childern[ch];
+       
+       for(int i = 0; i< word.Length; i++){
+        if(!node.child.ContainsKey(word[i])){
+            node.child[word[i]] = new TrieNode();
         }
-        node.is_word = true;
-        
+         node = node.child[word[i]];
+       }
+       node.is_word = true;
     }
 }
 public class Solution {
     public IList<string> FindWords(char[][] board, string[] words) {
         TrieNode root = new TrieNode();
         foreach(var word in words){
-            root.AddWord(word,root);
+            root.AddWord(word, root);
         }
-           HashSet<(int,int)> set = new();
-            HashSet<string> result = new();
-            for(int r = 0; r < board.Length; r++ ){
-                for(int c = 0; c < board[0].Length; c++ ){
-                     DFS(r,c,root,board,set,result,"");
-                }
-            }
-            return result.ToList();
-    }
-    private void DFS(int r, int c,TrieNode root,char[][] board,HashSet<(int,int)> set,HashSet<string> result, string word){
+    HashSet<string> result = new();
 
-        if(r < 0 || r >= board.Length || c  < 0 || c >=board[0].Length||
-            board[r][c] == '#' || !root.childern.ContainsKey(board[r][c])){
-            return;
-           }
-           //set.Contains((r,c))
-           //set.Add((r,c));
-           char ch = board[r][c];
-           word += board[r][c];
-           root = root.childern[board[r][c]];
-           if(root.is_word){
-            result.Add(word);
-           }
+        for (int r = 0; r < board.Length; r++)
+        {
+            for (int c = 0; c < board[0].Length; c++)
+            {
+                DFS(r, c, result,board,root, "");
+            }
+        }
+
+        return result.ToList();
+    }
+    private void DFS(int r, int c, HashSet<string> result,char[][] board, TrieNode root, string word){
+        if(r < 0 || r >= board.Length || c <0 || c >= board[0].Length || 
+            board[r][c] == '#'|| !root.child.ContainsKey(board[r][c]) ){
+                return;
+            }
+           
+            char ch =  board[r][c];
+            word += ch;
             board[r][c] = '#';
-           DFS(r+1,c,root,board,set,result,word);
-           DFS(r-1,c,root,board,set,result,word);
-           DFS(r,c+1,root,board,set,result,word);
-           DFS(r,c-1,root,board,set,result,word);
-           //set.Remove((r,c));
-           board[r][c] = ch;
+            root = root.child[ch];
+             if(root.is_word == true){
+                result.Add(word);
+            }
+            DFS(r + 1, c,result, board, root,  word);
+             DFS(r - 1, c,result, board, root, word);
+             DFS(r, c + 1,result, board, root, word);
+             DFS(r, c - 1,result, board, root, word);
+            board[r][c] = ch;
     }
 }
