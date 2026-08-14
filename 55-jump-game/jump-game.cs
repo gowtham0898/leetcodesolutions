@@ -5,6 +5,9 @@ public class Solution {
         for(int i =0; i < nums.Length; i++){
             if(i > max_index) return false;
             max_index = Math.Max(max_index, i+nums[i]);
+            if(max_index >=  nums.Length){
+                return true;
+            }
         }
         return true;
     }
