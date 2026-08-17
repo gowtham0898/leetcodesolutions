@@ -1,24 +1,21 @@
 public class Solution {
     public int SubarraySum(int[] nums, int k) {
-        int result = 0;
-        int cr_sum = 0;
-        Dictionary<int,int> map = new();
-        map[0] = 1;
-
-        for(int i = 0; i< nums.Length; i++){
-            cr_sum += nums[i];
-            int pre_sum = cr_sum - k;
-            if(map.ContainsKey(pre_sum)){
-                result += map[pre_sum];                
-            }
-
-            if(map.ContainsKey(cr_sum)){
-                map[cr_sum]++;
-            }
-            else{
-                map[cr_sum] = 1;
-            }   
+       Dictionary<int,int> map = new();
+       map[0] = 1;
+       int cur = 0;
+       int res = 0;
+       for(int i = 0; i < nums.Length; i++){
+        cur += nums[i];
+        int pre_sum = cur - k;
+        if(map.ContainsKey(pre_sum)){
+            res+=map[pre_sum];
         }
-        return result; 
+       if(map.ContainsKey(cur)){
+        map[cur]++;
+       }else{
+             map[cur] = 1;
+       }
+       }
+       return res;
     }
 }
