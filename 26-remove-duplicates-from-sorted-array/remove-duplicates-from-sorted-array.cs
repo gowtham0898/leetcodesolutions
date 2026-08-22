@@ -1,23 +1,16 @@
 public class Solution {
     public int RemoveDuplicates(int[] nums) {
-        int l = 1; // l is our left pointer
-        // our right pointer will increment always 
-        for(int i = 1; i < nums.Length;i++){ // i is our right pointer
-              // if you find any unique number then assign that to left pointer index and 
-              // increment the left point
-            // if(nums[i] != nums[i-1])
-            // {
-            //     nums[l] = nums[i];
-            //     l++;
-            // }
-            if(nums[i]> nums[l-1]){
-                //var temp = nums[i];
-                nums[l] = nums[i];
-                //nums[l] = temp;
-                l++;
-            }
-            
+        HashSet<int> hash = new();
+        int l = 0;
+        for(int i = 0; i < nums.Length; i++){
+           if(hash.Add(nums[i])){
+               nums[l] = nums[i];
+               l++;
+           }
         }
-        return l;
+        for(int j = hash.Count; j < nums.Length; j++){
+            nums[j] = 0;
+        }
+        return hash.Count;
     }
 }
